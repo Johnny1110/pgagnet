@@ -2,3 +2,4 @@ config.yml
 pgagent
 /dist/
 .idea
+.claude
