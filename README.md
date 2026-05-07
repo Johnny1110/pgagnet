@@ -40,7 +40,7 @@ make install
 `make install` will:
 
 1. Build the `pgagent` binary into `./dist/`
-2. Install it to `/usr/local/bin/pgagent` (uses `sudo` only if needed)
+2. Install it to `~/.local/bin/pgagent`
 3. Create `~/.pgagent/` and seed `~/.pgagent/config.yml` from
    `config.yml.example` (only if the file does not already exist —
    re-running `make install` will never overwrite your config)
