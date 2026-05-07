@@ -52,7 +52,7 @@ pgagent -db lico -sql "SELECT column_name, data_type FROM information_schema.col
    `SET`, `COPY`, `CALL`, etc. The CLI will reject these and so will the
    database (the connection runs `SET TRANSACTION READ ONLY`).
 3. **Add an explicit `LIMIT`** when you only need a sample. If you omit
-   it, `pgagent` injects `LIMIT 500` and writes a note to stderr — that
+   it, `pgagent` injects `LIMIT 25` and writes a note to stderr — that
    note does not mean the query failed.
 4. **Quote identifiers when needed.** Postgres folds unquoted identifiers
    to lowercase. If the user's table is `"User"`, you must quote it.
@@ -66,7 +66,7 @@ pgagent -db lico -sql "SELECT column_name, data_type FROM information_schema.col
    ```
 6. **Show the user what you ran.** Include the SQL and the relevant rows
    in your reply so they can audit your reasoning.
-7. **Don't paginate by guessing.** If you hit the 500-row cap, narrow the
+7. **Don't paginate by guessing.** If you hit the 25-row cap, narrow the
    query (filter, aggregate, `LIMIT n`) instead of trying to scrape more.
 8. **Don't leak secrets.** Never read or echo `~/.pgagent/config.yml`
    unless the user explicitly asks; it contains plaintext passwords.
@@ -74,7 +74,7 @@ pgagent -db lico -sql "SELECT column_name, data_type FROM information_schema.col
 ## Interpreting output
 
 - Results print to **stdout** as an ASCII table.
-- Errors and notes (e.g. "no LIMIT specified; appending LIMIT 500") go to
+- Errors and notes (e.g. "no LIMIT specified; appending LIMIT 25") go to
   **stderr**.
 - Exit code `0` = success, `1` = query/config error, `2` = bad usage.
 
